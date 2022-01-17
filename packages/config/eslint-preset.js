@@ -1,5 +1,6 @@
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
-  extends: ["next", "prettier"],
+  extends: ["next", "plugin:prettier/recommended", "plugin:testing-library/react"],
   settings: {
     next: {
       rootDir: ["apps/*/", "packages/*/"],

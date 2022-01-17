@@ -10,6 +10,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
+    "test": "turbo run test",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
@@ -20,7 +21,8 @@
     "pipeline": {
       "build": {
         "dependsOn": [
-          "^build"
+          "^build",
+          "test"
         ],
         "outputs": [
           "dist/**",
@@ -32,6 +34,9 @@
       },
       "dev": {
         "cache": false
+      },
+      "test": {
+
       }
     }
   },
