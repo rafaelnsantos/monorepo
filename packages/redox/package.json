@@ -1,0 +1,17 @@
+{
+  "name": "redox",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {},
+  "main": "index.ts",
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.7.1",
+    "localforage": "^1.10.0",
+    "react-redux": "^7.2.6",
+    "redux-persist": "^6.0.0"
+  },
+  "devDependencies": {
+    "test": "*",
+    "tsconfig": "*"
+  }
+}

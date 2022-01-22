@@ -1,10 +1,14 @@
-import { Button } from "ui";
+import { Layout, NextPageWithLayout, Page } from "ui";
+import { MyShows } from "~/components/MyShows";
 
-export default function Web() {
+const ShowsPage: NextPageWithLayout = () => {
   return (
-    <div>
-      <h1>Web</h1>
-      <Button />
-    </div>
+    <Page>
+      <MyShows />
+    </Page>
   );
-}
+};
+
+ShowsPage.Layout = Layout;
+
+export default ShowsPage;

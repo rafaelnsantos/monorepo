@@ -1,10 +1,10 @@
 import { screen, render } from "@testing-library/react";
-import Page from "../pages/index";
+import { MyLink } from "../components/MyLink";
 
 describe("Landing page", () => {
   it("should render", async () => {
-    render(<Page />);
+    render(<MyLink href="/search">Search</MyLink>);
 
-    expect(screen.getByText("Web")).toBeInTheDocument();
+    expect(screen.getByText("Search")).toBeInTheDocument();
   });
 });

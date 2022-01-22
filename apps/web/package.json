@@ -10,14 +10,22 @@
     "test": "jest"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.7.1",
+    "localforage": "^1.10.0",
     "next": "12.0.7",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "next-pwa": "^5.4.4",
+    "react": "^0.0.0-experimental-51947a14b-20220113",
+    "react-dom": "^0.0.0-experimental-51947a14b-20220113",
+    "react-query": "^3.34.8",
+    "react-redux": "^7.2.6",
+    "redox": "*",
+    "redux-persist": "^6.0.0",
     "ui": "*"
   },
   "devDependencies": {
     "@types/react": "17.0.37",
     "config": "*",
+    "next-router-mock": "^0.6.5",
     "next-transpile-modules": "9.0.0",
     "test": "*",
     "tsconfig": "*",

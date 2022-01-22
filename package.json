@@ -7,23 +7,20 @@
     "packages/*"
   ],
   "scripts": {
+    "start": "yarn workspace web start",
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "test": "turbo run test",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "test": "turbo run test"
   },
   "devDependencies": {
-    "prettier": "^2.5.1",
     "turbo": "latest"
   },
   "turbo": {
+    "baseBranch": "origin/main",
     "pipeline": {
       "build": {
-        "dependsOn": [
-          "^build",
-          "test"
-        ],
+        "dependsOn": ["^build"],
         "outputs": [
           "dist/**",
           ".next/**"
@@ -36,7 +33,7 @@
         "cache": false
       },
       "test": {
-
+        "dependsOn": ["build"]
       }
     }
   },
