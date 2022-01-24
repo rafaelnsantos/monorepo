@@ -7,7 +7,7 @@ import { persistConfig, reducer } from "~/store";
 import { getLayout, ThemeProvider } from "ui";
 import { Loading } from "~/components/Loading/Loading";
 import { ReduxProvider } from "redox";
-import { darkTheme, globalStyles, theme } from "~/stitches.config";
+import { darkTheme, globalStyles, lightTheme } from "~/stitches.config";
 import { LayoutProps } from "~/components/Layout";
 
 const queryClient = new QueryClient({
@@ -41,7 +41,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider darkTheme={darkTheme} theme={theme}>
+        <ThemeProvider darkTheme={darkTheme} lightTheme={lightTheme}>
           {loading ? (
             <Loading />
           ) : (

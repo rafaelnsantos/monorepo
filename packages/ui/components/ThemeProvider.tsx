@@ -1,16 +1,37 @@
 import { FC } from "react";
-import { ThemeProvider as Provider } from "next-themes";
+import { ThemeProvider as Provider, useTheme } from "next-themes";
 import { useViewHeightFix } from "../hooks/useViewHeightFix";
+import Head from "next/head";
 
 interface ThemeProviderOptions {
   darkTheme: any;
-  theme: any;
+  lightTheme: any;
 }
+
+interface MetaThemeProps {
+  light: string;
+  dark: string;
+}
+
+const MetaTheme: FC<MetaThemeProps> = ({ light, dark }) => {
+  const { resolvedTheme } = useTheme();
+
+  if (!resolvedTheme) return null;
+
+  return (
+    <Head>
+      <meta
+        name="theme-color"
+        content={resolvedTheme === "light" ? light : dark}
+      />
+    </Head>
+  );
+};
 
 export const ThemeProvider: FC<ThemeProviderOptions> = ({
   darkTheme,
   children,
-  theme,
+  lightTheme,
 }) => {
   useViewHeightFix();
 
@@ -20,9 +41,13 @@ export const ThemeProvider: FC<ThemeProviderOptions> = ({
       defaultTheme="system"
       value={{
         dark: darkTheme.className,
-        light: theme.className,
+        light: lightTheme.className,
       }}
     >
+      <MetaTheme
+        light={lightTheme.colors.background.value}
+        dark={darkTheme.colors.background.value}
+      />
       {children}
     </Provider>
   );
