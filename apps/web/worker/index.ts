@@ -2,14 +2,10 @@ import { getDetails, getReduxStore, isEpisodeToday } from "./util";
 
 declare const self: ServiceWorkerGlobalScope;
 
-let URL: string;
-
 self.addEventListener("periodicsync", function (event) {
   if (event.tag !== "get-latest-shows") return;
 
   getReduxStore(async (store) => {
-    URL = store.worker.url;
-
     try {
       const shows = await Promise.all(store.shows.value.map(getDetails));
 
@@ -25,7 +21,7 @@ self.addEventListener("periodicsync", function (event) {
             `New episode: ${show.name} - ${episode.name} today!`,
             {
               body: episode.name,
-              icon: show.image_thumbnail_path,
+              image: show.image_thumbnail_path,
               data: {
                 id: show.id,
               },
@@ -41,7 +37,7 @@ self.addEventListener("periodicsync", function (event) {
 
 self.addEventListener("notificationclick", function (event) {
   event.notification.close();
-  self.clients.openWindow(`${URL}/${event.notification.data.id}`);
+  self.clients.openWindow(`/${event.notification.data.id}`);
 });
 
 export {};

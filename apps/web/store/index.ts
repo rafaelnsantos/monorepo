@@ -1,8 +1,6 @@
 import { showsSlice } from "./shows";
 import localforage from "localforage";
-import { workerSlice } from "./worker";
 import { combineReducers } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
 
 export const actions = {
   shows: showsSlice.actions,
@@ -10,7 +8,6 @@ export const actions = {
 
 export const reducer = combineReducers({
   shows: showsSlice.reducer,
-  worker: workerSlice.reducer,
 });
 
 export const persistConfig = {
