@@ -1,5 +1,6 @@
 import { Suspense } from "react";
-import { Layout, NextPageWithLayout, Page } from "ui";
+import { Page } from "ui";
+import { Layout, NextPageWithLayout } from "~/components/Layout";
 import { SearchForm } from "~/components/search/SearchForm";
 
 const SearchPage: NextPageWithLayout = () => {

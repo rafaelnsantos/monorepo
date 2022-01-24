@@ -1,10 +1,6 @@
 import { styled } from "../stitches.config";
 
-export const Text = styled("p", {
-  fontFamily: "$system",
-
-  color: "$hiContrast",
-
+export const Text = styled("span", {
   variants: {
     size: {
       1: {

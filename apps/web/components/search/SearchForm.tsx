@@ -62,7 +62,7 @@ export const SearchForm: FC = () => {
       <SearchResult shows={data?.tv_shows} />
       <Pagination
         pages={data?.pages}
-        url={(page) => `?name=${name}&page=${page}`}
+        url={(page) => `/search?name=${name}&page=${page}`}
       />
     </Box>
   );

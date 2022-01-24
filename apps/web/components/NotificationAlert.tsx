@@ -8,7 +8,9 @@ async function registerPeriodicBackground() {
     name: "periodic-background-sync" as any,
   });
   if (status.state !== "granted")
-    throw new Error("periodic-background-sync status:" + status.state);
+    console.error("periodic-background-sync status:" + status.state);
+
+  if (!navigator.serviceWorker) return;
 
   const registration = (await navigator.serviceWorker.ready) as any;
 

@@ -1,6 +1,5 @@
-import { useRouter } from "next/router";
 import { FC } from "react";
-import { Box, Button } from "ui";
+import { Box } from "ui";
 import { MyLink } from "../MyLink";
 
 interface PaginationProps {
@@ -16,9 +15,9 @@ export const Pagination: FC<PaginationProps> = (props) => {
   return (
     <Box css={{ flexWrap: "wrap", justifyContent: "center" }}>
       {pages.map((page) => (
-        <MyLink key={page} href={props.url(page)}>
-          {page}
-        </MyLink>
+        <Box key={page} css={{ padding: "$2" }}>
+          <MyLink href={props.url(page)}>{page}</MyLink>
+        </Box>
       ))}
     </Box>
   );

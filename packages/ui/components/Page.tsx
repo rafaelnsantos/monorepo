@@ -1,6 +1,6 @@
 import { styled } from "../stitches.config";
 
-export const Page = styled("main", {
+export const Page = styled("div", {
   width: "100vw",
   mx: "auto",
   py: "$1",

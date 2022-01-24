@@ -3,13 +3,12 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { InstallAlert } from "~/components/InstallAlert";
-import { NotificationAlert } from "~/components/NotificationAlert";
 import { persistConfig, reducer } from "~/store";
-import { Header } from "~/components/Header";
-import { getLayout, globalStyles, LayoutProps } from "ui";
+import { getLayout, ThemeProvider } from "ui";
 import { Loading } from "~/components/Loading/Loading";
 import { ReduxProvider } from "redox";
+import { darkTheme, globalStyles, theme } from "~/stitches.config";
+import { LayoutProps } from "~/components/Layout";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,7 +23,6 @@ const queryClient = new QueryClient({
 
 function MyApp({ Component, pageProps }: AppProps) {
   const Layout = getLayout<LayoutProps>(Component);
-  globalStyles();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -32,8 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       setLoading(false);
     });
   }, []);
-
-  if (loading) return <Loading />;
+  globalStyles();
 
   return (
     <>
@@ -44,14 +41,17 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <QueryClientProvider client={queryClient}>
-        <ReduxProvider reducer={reducer} persist={persistConfig}>
-          <Layout title="TV Show Notifier">
-            <InstallAlert />
-            <NotificationAlert />
-            <Header />
-            <Component {...pageProps} />
-          </Layout>
-        </ReduxProvider>
+        <ThemeProvider darkTheme={darkTheme} theme={theme}>
+          {loading ? (
+            <Loading />
+          ) : (
+            <ReduxProvider reducer={reducer} persist={persistConfig}>
+              <Layout title="TV Show Notifier">
+                <Component {...pageProps} />
+              </Layout>
+            </ReduxProvider>
+          )}
+        </ThemeProvider>
       </QueryClientProvider>
     </>
   );

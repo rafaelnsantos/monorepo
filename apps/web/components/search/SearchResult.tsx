@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Button } from "ui";
+import { Box, Button, Text } from "ui";
 import { SearchRoot, SearchTvShow } from "~/resources/episodate.types";
 import { actions } from "~/store";
 
@@ -13,7 +13,7 @@ interface ShowRowProps {
 }
 
 const ShowRow: FC<ShowRowProps> = ({ show, isAdded, handleAdd }) => {
-  const { id, name, image_thumbnail_path } = show;
+  const { id, name, image_thumbnail_path, network } = show;
 
   return (
     <Box
@@ -25,10 +25,17 @@ const ShowRow: FC<ShowRowProps> = ({ show, isAdded, handleAdd }) => {
       }}
     >
       <img alt={name} src={image_thumbnail_path} width={64} height={64} />
-      <Box css={{ flex: 1, alignItems: "center" }}>
+      <Box
+        css={{
+          flex: 1,
+          flexDirection: "column",
+          justifyContent: "space-around",
+        }}
+      >
         <Link href={`/${id}`}>
           <a>{name}</a>
         </Link>
+        <Text size="1">{network}</Text>
       </Box>
       <Button onClick={handleAdd} disabled={isAdded}>
         Add

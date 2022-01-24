@@ -22,9 +22,7 @@ export const ReduxProvider: FC<ReduxProviderProps> = ({
   return (
     <Provider store={store}>
       {persist ? (
-        <PersistGate persistor={persistStore(store)} loading={false}>
-          {children}
-        </PersistGate>
+        <PersistGate persistor={persistStore(store)}>{children}</PersistGate>
       ) : (
         children
       )}

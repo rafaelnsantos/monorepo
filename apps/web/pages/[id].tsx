@@ -1,5 +1,6 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { Layout, NextPageWithLayout, Page } from "ui";
+import { Page } from "ui";
+import { Layout, NextPageWithLayout } from "~/components/Layout";
 import { getDetails } from "~/resources/episodate";
 import { DetailTvShow } from "~/resources/episodate.types";
 
