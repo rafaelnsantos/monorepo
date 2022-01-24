@@ -1,11 +1,15 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { Page } from "ui";
+import { Page, Text } from "ui";
 import { Layout, NextPageWithLayout } from "~/components/Layout";
 import { getDetails } from "~/resources/episodate";
 import { DetailTvShow } from "~/resources/episodate.types";
 
 const Home: NextPageWithLayout<DetailTvShow> = (show) => {
-  return <Page>{show.name}</Page>;
+  return (
+    <Page>
+      <Text as="h1">{show.name}</Text>
+    </Page>
+  );
 };
 
 Home.Layout = Layout;

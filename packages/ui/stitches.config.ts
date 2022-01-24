@@ -39,96 +39,113 @@ const darkColors: Colors = {
   "alert-background": "hsla(38deg, 100%, 50%, 0.1)",
 };
 
-export type CreateThemeOptions = {
-  light?: Partial<Colors>;
-  dark?: Partial<Colors>;
+type Fonts = {
+  primary: string;
+  mono: string;
 };
 
-export const buildStuff = (options?: CreateThemeOptions) => {
-  const { createTheme, globalCss, ...stitches } = createStitches({
-    theme: {
-      fonts: {
-        system: "system-ui",
-      },
-      colors: options?.light
-        ? { ...defaultColors, ...options.light }
-        : ({} as any),
-      fontSizes: {
-        1: "13px",
-        2: "15px",
-        3: "17px",
-      },
-      space: {
-        1: "5px",
-        2: "10px",
-        3: "15px",
-      },
-      fontWeights: {
-        light: 200,
-        normal: 400,
-        bold: 700,
-      },
-      lineHeights: {
-        body: 1.5,
-        heading: 1.1,
-      },
-    },
-    media: {
-      sm: "(min-width: 640px)",
-      md: "(min-width: 768px)",
-      lg: "(min-width: 1024px)",
-      motion: "(prefers-reduced-motion)",
-    },
+const defaultFonts: Fonts = {
+  primary: "system-ui",
+  mono: "mono",
+};
 
-    utils: {
-      mx: (value: Property.MarginRight) => ({
-        marginLeft: value,
-        marginRight: value,
-      }),
-      my: (value: Property.MarginTop) => ({
-        marginTop: value,
-        marginBottom: value,
-      }),
-      py: (value: Property.PaddingTop) => ({
-        paddingTop: value,
-        paddingBottom: value,
-      }),
-      px: (value: Property.PaddingRight) => ({
-        paddingRight: value,
-        paddingLeft: value,
-      }),
+const { styled, globalCss, createTheme, ...stitches } = createStitches({
+  theme: {
+    fonts: defaultFonts,
+    colors: defaultColors,
+    fontSizes: {
+      1: "13px",
+      2: "15px",
+      3: "17px",
     },
+    space: {
+      1: "5px",
+      2: "10px",
+      3: "15px",
+    },
+    fontWeights: {
+      light: 200,
+      normal: 400,
+      bold: 700,
+    },
+    lineHeights: {
+      body: 1.5,
+      heading: 1.1,
+    },
+  },
+  media: {
+    sm: "(min-width: 640px)",
+    md: "(min-width: 768px)",
+    lg: "(min-width: 1024px)",
+    motion: "(prefers-reduced-motion)",
+  },
+
+  utils: {
+    mx: (value: Property.MarginRight) => ({
+      marginLeft: value,
+      marginRight: value,
+    }),
+    my: (value: Property.MarginTop) => ({
+      marginTop: value,
+      marginBottom: value,
+    }),
+    py: (value: Property.PaddingTop) => ({
+      paddingTop: value,
+      paddingBottom: value,
+    }),
+    px: (value: Property.PaddingRight) => ({
+      paddingRight: value,
+      paddingLeft: value,
+    }),
+  },
+});
+
+const globalStyles = globalCss({
+  body: {
+    margin: 0,
+    padding: 0,
+    background: "$background",
+    fontFamily: "$primary",
+    fontWeight: "$normal",
+    color: "$text",
+  },
+  "h1, h2, h3, h4, h5, h6": {
+    fontFamily: "$mono",
+    fontWeight: "$normal",
+  },
+  "@motion": {
+    transition: "dissolve",
+    animation: "dissolve",
+  },
+  "#__next": {
+    mx: "auto",
+    height: "calc(var(--vh, 1vh) * 100)",
+    flexDirection: "column",
+  },
+  a: {
+    color: "$primary",
+    textDecoration: "none",
+  },
+});
+
+export type CreateThemeOptions = {
+  light: Partial<Colors>;
+  dark: Partial<Colors>;
+  fonts: Partial<Fonts>;
+};
+
+export const buildStuff = (options: CreateThemeOptions) => {
+  const lightTheme = createTheme({
+    fonts: { ...defaultFonts, ...options.fonts },
+    colors: { ...defaultColors, ...options.light },
   });
 
   const darkTheme = createTheme({
-    colors: options?.dark ? { ...darkColors, ...options.dark } : {},
-  });
-  const globalStyles = globalCss({
-    body: {
-      margin: 0,
-      padding: 0,
-      background: "$background",
-      fontFamily: "$system",
-      color: "$text",
-    },
-    "@motion": {
-      transition: "dissolve",
-      animation: "dissolve",
-      background: "blue",
-    },
-    "#__next": {
-      mx: "auto",
-      height: "calc(var(--vh, 1vh) * 100)",
-      flexDirection: "column",
-    },
-    a: {
-      color: "$primary",
-    },
+    fonts: { ...defaultFonts, ...options.fonts },
+    colors: { ...darkColors, ...options.dark },
   });
 
-  return { stitches, darkTheme, globalStyles };
+  return { stitches, darkTheme, globalStyles, lightTheme, styled };
 };
 
-export const {
-  stitches: { styled },
-} = buildStuff();
+export { styled };

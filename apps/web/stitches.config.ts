@@ -1,6 +1,6 @@
 import { buildStuff } from "ui";
 
-const { stitches, darkTheme, globalStyles } = buildStuff({
+const { stitches, darkTheme, globalStyles, lightTheme, styled } = buildStuff({
   light: {
     text: "hsl(222deg, 22%, 5%)",
     background: "hsl(0deg, 0%, 100%)",
@@ -9,8 +9,12 @@ const { stitches, darkTheme, globalStyles } = buildStuff({
     text: "hsl(0deg, 0%, 100%)",
     background: "hsl(210deg, 30%, 8%)",
   },
+  fonts: {
+    primary: "'Fira Sans', sans-serif",
+    mono: "'Space Mono', monospace",
+  },
 });
 
-export const { styled, theme, keyframes, getCssText, reset } = stitches;
+export const { keyframes, getCssText, reset } = stitches;
 
-export { darkTheme, globalStyles };
+export { darkTheme, globalStyles, lightTheme, styled };

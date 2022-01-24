@@ -42,6 +42,14 @@ export default class Document extends NextDocument {
             id="stitches"
             dangerouslySetInnerHTML={{ __html: getCssAndReset() }}
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=optional"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Space+Mono&display=optional"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />
