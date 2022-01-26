@@ -50,6 +50,11 @@ export default class Document extends NextDocument {
             href="https://fonts.googleapis.com/css2?family=Space+Mono&display=optional"
             rel="stylesheet"
           />
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8023402418622835"
+            crossOrigin="anonymous"
+          />
         </Head>
         <body>
           <Main />
