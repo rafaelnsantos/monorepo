@@ -26,6 +26,7 @@ export const Layout: FC<LayoutProps> = ({ children, title, className }) => (
     <Box
       as="main"
       css={{
+        flex: 1,
         px: "$2",
       }}
     >

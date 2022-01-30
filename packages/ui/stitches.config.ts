@@ -119,6 +119,7 @@ const globalStyles = globalCss({
   },
   "#__next": {
     mx: "auto",
+    display: "flex",
     height: "calc(var(--vh, 1vh) * 100)",
     flexDirection: "column",
   },
