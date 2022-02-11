@@ -14,31 +14,11 @@
     "test": "turbo run test"
   },
   "devDependencies": {
-    "turbo": "latest"
-  },
-  "turbo": {
-    "baseBranch": "origin/main",
-    "pipeline": {
-      "build": {
-        "dependsOn": ["^build"],
-        "outputs": [
-          "dist/**",
-          ".next/**"
-        ]
-      },
-      "lint": {
-        "outputs": []
-      },
-      "dev": {
-        "cache": false
-      },
-      "test": {
-        "dependsOn": ["build"]
-      }
-    }
+    "turbo": "^1.1.2"
   },
   "engines": {
     "npm": ">=7.0.0",
     "node": ">=14.0.0"
-  }
+  },
+  "packageManager": "yarn@1.22.17"
 }
