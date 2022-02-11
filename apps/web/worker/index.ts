@@ -37,7 +37,7 @@ self.addEventListener("periodicsync", function (event) {
 
 self.addEventListener("notificationclick", function (event) {
   event.notification.close();
-  self.clients.openWindow(`/${event.notification.data.id}`);
+  self.clients.openWindow(`/?mode=standalone&id=${event.notification.data.id}`);
 });
 
 export {};
