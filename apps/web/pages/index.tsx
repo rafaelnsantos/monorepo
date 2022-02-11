@@ -28,7 +28,7 @@ const App: NextPage = () => {
 
   return (
     <View
-      height="$screenHeight"
+      height="calc(var(--vh, 1vh) * 100)"
       _dark={{ bg: "backgroundDark" }}
       _light={{ bg: "backgroundLight" }}
     >
