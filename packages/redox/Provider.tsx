@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { PersistConfig, persistStore } from "redux-persist";

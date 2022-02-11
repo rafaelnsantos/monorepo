@@ -1,23 +1,59 @@
-import { useRouter } from "next/router";
-import { useSwipeable } from "react-swipeable";
-import { Page } from "ui";
-import { Layout, NextPageWithLayout } from "~/components/Layout";
-import { MyShows } from "~/components/MyShows";
+import { useEffect } from "react";
+import { SearchForm } from "~/components/Search/SearchForm";
+import { MyShows } from "~/components/MyShows/MyShows";
+import { useDispatch } from "react-redux";
+import { actions } from "~/store";
+import { ShowModal } from "~/components/ShowDetail/ShowModal";
+import { SetupApp } from "~/components/SetupApp";
+import { useColorModeValue, useTheme, View } from "native-base";
+import { NextPage } from "next";
+import Head from "next/head";
 
-const ShowsPage: NextPageWithLayout = () => {
-  const router = useRouter();
+interface AppProps {
+  id?: string;
+  isPWA?: boolean;
+}
 
-  const handlers = useSwipeable({
-    onSwipedLeft: () => router.push("/search"),
-  });
+const App: NextPage = () => {
+  const params = new URLSearchParams(window.location.search);
+  const theme = useTheme();
+  const isPWA = params.get("mode") === "standalone";
+
+  const id = params.get("id");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (id) dispatch(actions.shows.selectShow(+id));
+  }, [id, dispatch]);
 
   return (
-    <Page {...handlers}>
+    <View
+      height="$screenHeight"
+      _dark={{ bg: "backgroundDark" }}
+      _light={{ bg: "backgroundLight" }}
+    >
+      <Head>
+        <meta
+          name="theme-color"
+          content={useColorModeValue(
+            theme.colors.backgroundLight,
+            theme.colors.backgroundDark
+          )}
+        />
+        <link
+          rel="manifest"
+          href={`/manifest.json?colorMode=${useColorModeValue(
+            "light",
+            "dark"
+          )}`}
+        />
+      </Head>
+      <SetupApp isPWA={isPWA} />
       <MyShows />
-    </Page>
+      <SearchForm />
+      <ShowModal />
+    </View>
   );
 };
 
-ShowsPage.Layout = Layout;
-
-export default ShowsPage;
+export default App;

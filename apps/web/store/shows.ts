@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { DefaultRootState } from "react-redux";
 
 export interface ShowsStore {
   value: number[];
+  selected?: number;
 }
 
 const initialState: ShowsStore = {
@@ -24,5 +26,11 @@ export const showsSlice = createSlice({
       shows.delete(payload);
       state.value = Array.from(shows);
     },
+    selectShow: (state, action: PayloadAction<number | undefined>) => {
+      state.selected = action.payload;
+    },
   },
 });
+
+export const checkIsAdded = (id: number) => (state: DefaultRootState) =>
+  state.shows.value.includes(id);

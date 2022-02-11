@@ -1,22 +1,9 @@
-import React from "react";
 import NextDocument, { Html, Head, Main, NextScript } from "next/document";
-import { getCssText, reset } from "~/stitches.config";
-
+import { getInitialProps } from "@expo/next-adapter/document";
 const APP_NAME = "Name";
 const APP_DESCRIPTION = "Description";
 
-/**
- * Get the css and reset the internal css representation.
- * This is very *IMPORTANT* to do as the server might handle multiple requests
- * and we don't want to have the css accumulated from previous requests
- */
-const getCssAndReset = () => {
-  const css = getCssText();
-  reset();
-  return css;
-};
-
-export default class Document extends NextDocument {
+class Document extends NextDocument {
   render() {
     return (
       <Html lang="en">
@@ -36,12 +23,7 @@ export default class Document extends NextDocument {
             sizes="180x180"
             href="/icons/apple-touch-icon.png"
           />
-          <link rel="manifest" href="/manifest.json" />
           <link rel="shortcut icon" href="/favicon.ico" />
-          <style
-            id="stitches"
-            dangerouslySetInnerHTML={{ __html: getCssAndReset() }}
-          />
           <link
             href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=optional"
             rel="stylesheet"
@@ -59,3 +41,7 @@ export default class Document extends NextDocument {
     );
   }
 }
+
+Document.getInitialProps = getInitialProps;
+
+export default Document;

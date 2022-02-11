@@ -26,15 +26,6 @@
           ".next/**"
         ]
       },
-      "web#build": {
-        "dependsOn": [
-          "^build",
-          "$NEXT_PUBLIC_VERCEL_URL"
-        ],
-        "outputs": [
-          ".next/**"
-        ]
-      },
       "lint": {
         "outputs": []
       },

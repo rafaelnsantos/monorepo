@@ -1,31 +1,30 @@
-import { QueryFunctionContext, useQuery } from "react-query";
-import { fetcher } from "~/worker/util";
+import { QueryFunctionContext } from "react-query";
 import { DetailRoot, SearchRoot } from "./episodate.types";
 
 const baseUrl = "https://www.episodate.com/api";
 
-const getSearch = (name: string, page: number) =>
-  fetcher<SearchRoot>(`${baseUrl}/search?q=${name}&page=${page}`);
+const fetcher = async <T>(url: string): Promise<T> => {
+  const response = await fetch(baseUrl + url);
 
-export const getDetails = (id: number) =>
-  fetcher<DetailRoot>(`${baseUrl}/show-details?q=${id}`).then(
-    (res) => res.tvShow
-  );
+  if (response.status !== 200) {
+    throw new Error("Episodate API returned Error " + response.status);
+  }
 
-const querySearch = ({
+  return response.json();
+};
+
+const fetchSearch = (name: string, page: number) =>
+  fetcher<SearchRoot>(`/search?q=${name}&page=${page}`);
+
+const fetchDetails = (id: number) =>
+  fetcher<DetailRoot>(`/show-details?q=${id}`).then((res) => res.tvShow);
+
+export const querySearch = ({
   queryKey,
 }: QueryFunctionContext<[string, { name: string; page: number }]>) =>
-  getSearch(queryKey[1].name, queryKey[1].page);
+  fetchSearch(queryKey[1].name, queryKey[1].page);
 
-const queryDetail = ({
+export const queryDetail = ({
   queryKey,
 }: QueryFunctionContext<[string, { id: number }]>) =>
-  getDetails(queryKey[1].id);
-
-export const useDetail = (id: number) =>
-  useQuery(["detail", { id }], queryDetail);
-
-export const useSearch = (name: string, page: number) =>
-  useQuery(["search", { name, page }], querySearch, {
-    enabled: !!name,
-  });
+  fetchDetails(queryKey[1].id);

@@ -42,3 +42,5 @@ export const persistedStoreBuilder = (
 };
 
 export * from "./Provider";
+
+export * from "./useLocalForage";

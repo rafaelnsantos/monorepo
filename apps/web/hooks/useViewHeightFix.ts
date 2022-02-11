@@ -8,11 +8,5 @@ const setVh = () => {
 export function useViewHeightFix() {
   useEffect(() => {
     setVh();
-
-    window.addEventListener("resize", setVh);
-
-    return () => {
-      window.removeEventListener("resize", setVh);
-    };
   }, []);
 }
