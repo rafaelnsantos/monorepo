@@ -5,22 +5,20 @@ import { TouchableOpacity } from "react-native";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 import { actions } from "~/store";
-import { Image, Text, View } from "native-base";
-
-// const Container = styled(TouchableOpacity)({
-//   justifyContent: ["space-between"],
-//   flexDirection: ["row"],
-// });
+import { Image, Text, useTheme, View } from "native-base";
 
 interface MyShowsRowProps {
   id: number;
+  time: string;
+  episode: string;
 }
 
-export const MyShowsRow: FC<MyShowsRowProps> = ({ id }) => {
+export const MyShowsRow: FC<MyShowsRowProps> = ({ id, episode, time }) => {
   const { data } = useQuery(["detail", { id }], queryDetail, {
     suspense: true,
   });
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const handleSelect = () => dispatch(actions.shows.selectShow(id));
 
@@ -33,7 +31,12 @@ export const MyShowsRow: FC<MyShowsRowProps> = ({ id }) => {
 
   return (
     <TouchableOpacity
-      style={{ flex: 1, justifyContent: "space-between", flexDirection: "row" }}
+      style={{
+        flex: 1,
+        justifyContent: "space-between",
+        flexDirection: "row",
+        marginBottom: theme.sizes["2"],
+      }}
       onPress={handleSelect}
     >
       <Image
@@ -44,8 +47,11 @@ export const MyShowsRow: FC<MyShowsRowProps> = ({ id }) => {
         alt={data.name}
       />
       <View mx="2" flex="1">
-        <Text>{data.name}</Text>
+        <Text>
+          {data.name} - {episode}
+        </Text>
         <Text>{data.network}</Text>
+        <Text>{time.substring(0, 5)}</Text>
       </View>
     </TouchableOpacity>
   );

@@ -13,7 +13,7 @@ export const theme = extendTheme({
   },
   sizes: {
     $screenHeight: height,
-    $visibleScreenHeight: height - BOTTOM_SHEET,
+    $visibleScreenHeight: height - BOTTOM_SHEET_HEADER,
     $bottomSheet: height * BOTTOM_SHEET,
     $bottomSheetHeader: BOTTOM_SHEET_HEADER,
     $bottomSheetBody: height * BOTTOM_SHEET - BOTTOM_SHEET_HEADER,

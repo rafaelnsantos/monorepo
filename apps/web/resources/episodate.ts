@@ -28,3 +28,10 @@ export const queryDetail = ({
   queryKey,
 }: QueryFunctionContext<[string, { id: number }]>) =>
   fetchDetails(queryKey[1].id);
+
+const fetchDetailsBatch = (ids: number[]) => Promise.all(ids.map(fetchDetails));
+
+export const queryDetailBatch = ({
+  queryKey,
+}: QueryFunctionContext<[string, { ids: number[] }]>) =>
+  fetchDetailsBatch(queryKey[1].ids);
